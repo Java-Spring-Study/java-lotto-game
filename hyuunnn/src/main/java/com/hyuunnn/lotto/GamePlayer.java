@@ -23,7 +23,7 @@ public class GamePlayer {
 
   private Lotto WinningNumberList;
   private int bonusNumber;
-  private int priceNumber;
+  private int lottoCount;
 
   public void run() {
     input();
@@ -50,9 +50,7 @@ public class GamePlayer {
     try {
       String strInputPrice = SCANNER.nextLine();
       PriceNumberError.validateNumber(strInputPrice);
-
-      priceNumber = Integer.parseInt(strInputPrice);
-      addLotto(priceNumber);
+      addLotto(Integer.parseInt(strInputPrice));
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -62,7 +60,7 @@ public class GamePlayer {
   }
 
   private void addLotto(int price) {
-    int lottoCount = getLottoCount(price);
+    lottoCount = getLottoCount(price);
     System.out.printf("%d개를 구매했습니다.\n", lottoCount);
 
     IntStream.range(0, lottoCount).forEach(e -> {
@@ -119,7 +117,8 @@ public class GamePlayer {
     HashMap<Integer, Integer> rankMap = getRankMap();
     printRankMap(rankMap);
 
-    System.out.printf("총 수익률은 %.3f입니다.", (double) getTotalPrice(rankMap) / priceNumber);
+    System.out.printf("총 수익률은 %.3f입니다.",
+        (double) getTotalPrice(rankMap) / (lottoCount * MINIMUM_LOTTO_PRICE));
   }
 
   private HashMap<Integer, Integer> getRankMap() {
@@ -143,7 +142,7 @@ public class GamePlayer {
   private int getTotalPrice(HashMap<Integer, Integer> rankMap) {
     return Arrays.stream(Rank.values())
         .filter(e -> rankMap.get(e.getMatch()) != null)
-        .map(e -> e.getPrice() * rankMap.get(e.getMatch()))
+        .map(e -> rankMap.get(e.getMatch()) * e.getPrice())
         .reduce(0, Integer::sum);
   }
 }
