@@ -34,7 +34,7 @@ public class WinningLotto {
     } else if (matchCount == 6) {
       return Rank.FIRST;
     }
-    return Rank.NONE;
+    return null;
   }
 
   private Rank checkBonusNumber(Lotto userLotto, int bonusNumber) {

@@ -118,14 +118,15 @@ public class GamePlayer {
     HashMap<Integer, Integer> rankMap = new HashMap<>();
     lottoList.forEach(lottoObj -> {
       Rank lottoRank = winninglotto.match(lottoObj);
-      rankMap.merge(lottoRank.getMatch(), 1, Integer::sum);
+      if (lottoRank != null) {
+        rankMap.merge(lottoRank.getMatch(), 1, Integer::sum);
+      }
     });
     return rankMap;
   }
 
   private void printRankMap(HashMap<Integer, Integer> rankMap) {
     Arrays.stream(Rank.values())
-        .filter(rankObj -> rankObj != Rank.NONE)
         .forEach(rankObj -> {
           Optional<Integer> priceCount = Optional.ofNullable(rankMap.get(rankObj.getMatch()));
           System.out.printf("%d개 일치 (%d원)-%d개\n", rankObj.getMatch(), rankObj.getPrice(),
@@ -135,8 +136,8 @@ public class GamePlayer {
 
   private int getTotalPrice(HashMap<Integer, Integer> rankMap) {
     return Arrays.stream(Rank.values())
-        .filter(rankObj -> rankMap.get(rankObj.getMatch()) != null)
-        .map(rankObj -> rankMap.get(rankObj.getMatch()) * rankObj.getPrice())
+        .map(rankObj -> Optional.ofNullable(rankMap.get(rankObj.getMatch())).orElse(0)
+            * rankObj.getPrice())
         .reduce(0, Integer::sum);
   }
 }

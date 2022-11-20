@@ -1,7 +1,6 @@
 package com.hyuunnn.lotto;
 
 public enum Rank {
-  NONE(0, 0),
   FIFTH(3, 5_000),
   FOURTH(4, 50_000),
   THIRD(5, 1_500_000),
