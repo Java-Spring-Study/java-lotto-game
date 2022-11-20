@@ -68,7 +68,7 @@ public class GamePlayer {
     });
   }
 
-  public static int getLottoCount(int price) {
+  public int getLottoCount(int price) {
     return price / MINIMUM_LOTTO_PRICE;
   }
 
