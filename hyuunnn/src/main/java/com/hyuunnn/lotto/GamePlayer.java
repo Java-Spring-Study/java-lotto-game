@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
 public class GamePlayer {
 
   private final List<Lotto> lottoList = new ArrayList<>();
-  private WinningLotto winninglotto;
+  private WinningLotto winningLotto;
   private Lotto WinningNumberList;
   private int bonusNumber;
   private int lottoCount;
@@ -42,7 +42,7 @@ public class GamePlayer {
     while (inputBonusNumber() == InputType.INVALID)
       ;
 
-    winninglotto = new WinningLotto(WinningNumberList, bonusNumber);
+    winningLotto = new WinningLotto(WinningNumberList, bonusNumber);
   }
 
   private InputType inputPrice() {
@@ -117,7 +117,7 @@ public class GamePlayer {
   private HashMap<Integer, Integer> getRankMap() {
     HashMap<Integer, Integer> rankMap = new HashMap<>();
     lottoList.forEach(lottoObj -> {
-      Rank lottoRank = winninglotto.match(lottoObj);
+      Rank lottoRank = winningLotto.match(lottoObj);
       if (lottoRank != null) {
         rankMap.merge(lottoRank.getMatch(), 1, Integer::sum);
       }
