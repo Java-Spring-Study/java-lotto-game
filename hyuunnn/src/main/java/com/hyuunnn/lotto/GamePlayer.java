@@ -62,9 +62,9 @@ public class GamePlayer {
     lottoCount = getLottoCount(price);
     System.out.printf("%d개를 구매했습니다.\n", lottoCount);
 
-    IntStream.range(0, lottoCount).forEach(e -> {
+    IntStream.range(0, lottoCount).forEach(i -> {
       lottoList.add(new Lotto(randomize()));
-      System.out.println(lottoList.get(e));
+      System.out.println(lottoList.get(i));
     });
   }
 
@@ -116,8 +116,8 @@ public class GamePlayer {
 
   private HashMap<Integer, Integer> getRankMap() {
     HashMap<Integer, Integer> rankMap = new HashMap<>();
-    lottoList.forEach(e -> {
-      Rank lottoRank = winninglotto.match(e);
+    lottoList.forEach(lottoObj -> {
+      Rank lottoRank = winninglotto.match(lottoObj);
       rankMap.merge(lottoRank.getMatch(), 1, Integer::sum);
     });
     return rankMap;
@@ -125,17 +125,18 @@ public class GamePlayer {
 
   private void printRankMap(HashMap<Integer, Integer> rankMap) {
     Arrays.stream(Rank.values())
-        .filter(e -> e != Rank.NONE)
-        .forEach(e -> {
-          Optional<Integer> priceCount = Optional.ofNullable(rankMap.get(e.getMatch()));
-          System.out.printf("%d개 일치 (%d원)-%d개\n", e.getMatch(), e.getPrice(), priceCount.orElse(0));
+        .filter(rankObj -> rankObj != Rank.NONE)
+        .forEach(rankObj -> {
+          Optional<Integer> priceCount = Optional.ofNullable(rankMap.get(rankObj.getMatch()));
+          System.out.printf("%d개 일치 (%d원)-%d개\n", rankObj.getMatch(), rankObj.getPrice(),
+              priceCount.orElse(0));
         });
   }
 
   private int getTotalPrice(HashMap<Integer, Integer> rankMap) {
     return Arrays.stream(Rank.values())
-        .filter(e -> rankMap.get(e.getMatch()) != null)
-        .map(e -> rankMap.get(e.getMatch()) * e.getPrice())
+        .filter(rankObj -> rankMap.get(rankObj.getMatch()) != null)
+        .map(rankObj -> rankMap.get(rankObj.getMatch()) * rankObj.getPrice())
         .reduce(0, Integer::sum);
   }
 }
