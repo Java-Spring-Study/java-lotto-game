@@ -20,7 +20,6 @@ public class GamePlayer {
 
   private final List<Lotto> lottoList = new ArrayList<>();
   private WinningLotto winninglotto;
-
   private Lotto WinningNumberList;
   private int bonusNumber;
   private int lottoCount;

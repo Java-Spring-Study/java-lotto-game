@@ -1,8 +1,6 @@
 package com.hyuunnn.lotto.Error;
 
 import static com.hyuunnn.lotto.Util.LOTTO_LENGTH;
-import static com.hyuunnn.lotto.Util.MAX_LOTTO_RANGE;
-import static com.hyuunnn.lotto.Util.MIN_LOTTO_RANGE;
 
 import java.util.Arrays;
 
@@ -24,12 +22,6 @@ public class WinningNumberError extends Error {
     Arrays.stream(strList)
         .mapToInt(Integer::parseInt)
         .forEach(n -> checkRange(n));
-  }
-
-  public static void checkRange(int lottoNumber) {
-    if (lottoNumber < MIN_LOTTO_RANGE || lottoNumber > MAX_LOTTO_RANGE) {
-      throw new IllegalStateException("로또 숫자 범위는 1~45 입니다.");
-    }
   }
 
   public static void checkLength(String[] strList) {
