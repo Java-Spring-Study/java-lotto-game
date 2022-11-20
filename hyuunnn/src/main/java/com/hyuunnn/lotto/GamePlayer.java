@@ -20,7 +20,7 @@ public class GamePlayer {
 
   private final List<Lotto> lottoList = new ArrayList<>();
   private WinningLotto winningLotto;
-  private Lotto WinningNumberList;
+  private Lotto winningNumberList;
   private int bonusNumber;
   private int lottoCount;
 
@@ -42,7 +42,7 @@ public class GamePlayer {
     while (inputBonusNumber() == InputType.INVALID)
       ;
 
-    winningLotto = new WinningLotto(WinningNumberList, bonusNumber);
+    winningLotto = new WinningLotto(winningNumberList, bonusNumber);
   }
 
   private InputType inputPrice() {
@@ -78,7 +78,7 @@ public class GamePlayer {
       String[] strWinningNumberList = strInputWinningNumber.split(SEPARATOR);
       WinningNumberError.validateNumber(strWinningNumberList);
 
-      WinningNumberList = new Lotto(Arrays.stream(strWinningNumberList)
+      winningNumberList = new Lotto(Arrays.stream(strWinningNumberList)
           .mapToInt(Integer::parseInt)
           .boxed()
           .toList());
@@ -93,7 +93,7 @@ public class GamePlayer {
   private InputType inputBonusNumber() {
     try {
       String strInputBonusNumber = SCANNER.nextLine();
-      BonusNumberError.validateNumber(WinningNumberList, strInputBonusNumber);
+      BonusNumberError.validateNumber(winningNumberList, strInputBonusNumber);
       bonusNumber = Integer.parseInt(strInputBonusNumber);
 
     } catch (Exception e) {
