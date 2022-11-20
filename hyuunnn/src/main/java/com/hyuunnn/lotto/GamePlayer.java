@@ -69,13 +69,7 @@ public class GamePlayer {
   }
 
   public static int getLottoCount(int price) {
-    int count = 0;
-
-    while (price >= MINIMUM_LOTTO_PRICE) {
-      price -= MINIMUM_LOTTO_PRICE;
-      count++;
-    }
-    return count;
+    return price / MINIMUM_LOTTO_PRICE;
   }
 
   private InputType inputWinningNumber() {
