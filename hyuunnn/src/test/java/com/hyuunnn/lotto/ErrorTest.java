@@ -43,8 +43,9 @@ public class ErrorTest {
     TryWinningNumberException(new String[]{"34", "20", "18", "43", "45"}, "로또는 6개의 숫자가 필요합니다.");
     TryWinningNumberException(new String[]{"34", "20", "18", "43", "45", "9", "10"},
         "로또는 6개의 숫자가 필요합니다.");
-    TryWinningNumberException(new String[]{"1","1","1","1","1","1"}, "로또 숫자는 서로 중복될 수 없습니다.");
-    TryWinningNumberException(new String[]{"34","20","18","43","45","34"}, "로또 숫자는 서로 중복될 수 없습니다.");
+    TryWinningNumberException(new String[]{"1", "1", "1", "1", "1", "1"}, "로또 숫자는 서로 중복될 수 없습니다.");
+    TryWinningNumberException(new String[]{"34", "20", "18", "43", "45", "34"},
+        "로또 숫자는 서로 중복될 수 없습니다.");
     TryWinningNumberException(new String[]{"aa", "bb", "44"}, "64비트 정수입력 범위를 벗어났습니다.");
   }
 
