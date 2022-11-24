@@ -15,7 +15,7 @@ public class Util {
   public static final int MINIMUM_LOTTO_PRICE = 1000;
   public static final String SEPARATOR = ",";
 
-  public static InputType isNumeric(String str) {
+  public static InputType isInteger(String str) {
     try {
       Integer.parseInt(str);
       return InputType.VALID;
