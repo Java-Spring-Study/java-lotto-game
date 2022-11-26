@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -49,20 +50,22 @@ public class LottoTest {
   @DisplayName("WinningLotto match 메서드 테스트")
   public void WinningLottoMatchTest() {
     List<Integer> lottoList = Arrays.asList(1, 2, 3, 4, 5, 6);
-    assertRank(Arrays.asList(1, 2, 3, 4, 5, 6), lottoList, 7, Rank.FIRST);
-    assertRank(Arrays.asList(1, 2, 3, 4, 5, 7), lottoList, 7, Rank.SECOND);
-    assertRank(Arrays.asList(1, 2, 3, 4, 5, 8), lottoList, 7, Rank.THIRD);
-    assertRank(Arrays.asList(1, 2, 3, 4, 8, 9), lottoList, 7, Rank.FOURTH);
-    assertRank(Arrays.asList(1, 2, 3, 8, 9, 10), lottoList, 7, Rank.FIFTH);
+    assertRank(Arrays.asList(1, 2, 3, 4, 5, 6), lottoList, 7, Optional.ofNullable(Rank.FIRST));
+    assertRank(Arrays.asList(1, 2, 3, 4, 5, 7), lottoList, 7, Optional.ofNullable(Rank.SECOND));
+    assertRank(Arrays.asList(1, 2, 3, 4, 5, 8), lottoList, 7, Optional.ofNullable(Rank.THIRD));
+    assertRank(Arrays.asList(1, 2, 3, 4, 8, 9), lottoList, 7, Optional.ofNullable(Rank.FOURTH));
+    assertRank(Arrays.asList(1, 2, 3, 8, 9, 10), lottoList, 7, Optional.ofNullable(Rank.FIFTH));
+    assertRank(Arrays.asList(1, 2, 8, 9, 10, 11), lottoList, 7,Optional.empty());
+    assertRank(Arrays.asList(1, 8, 9, 10, 11, 12), lottoList, 7, Optional.empty());
+    assertRank(Arrays.asList(8, 9, 10, 11, 12, 13), lottoList, 7, Optional.empty());
   }
 
   private void assertRank(List<Integer> testList, List<Integer> lottoList, int bonusNumber,
-      Rank rankResult) {
+      Optional<Rank> rankResult) {
     WinningLotto winningLotto;
-    Rank rankTest;
 
     winningLotto = new WinningLotto(new Lotto(lottoList), bonusNumber);
-    rankTest = winningLotto.match(new Lotto(testList));
+    Optional<Rank> rankTest = winningLotto.match(new Lotto(testList));
     assertThat(rankTest).isEqualTo(rankResult);
   }
 }
