@@ -28,13 +28,13 @@ public class WinningLotto {
 
   private Optional<Rank> getRank(Lotto userLotto, int matchCount, int bonusNumber) {
     if (matchCount == 3) {
-      return Optional.ofNullable(Rank.FIFTH);
+      return Optional.of(Rank.FIFTH);
     } else if (matchCount == 4) {
-      return Optional.ofNullable(Rank.FOURTH);
+      return Optional.of(Rank.FOURTH);
     } else if (matchCount == 5) {
-      return Optional.ofNullable(checkBonusNumber(userLotto, bonusNumber));
+      return Optional.of(checkBonusNumber(userLotto, bonusNumber));
     } else if (matchCount == 6) {
-      return Optional.ofNullable(Rank.FIRST);
+      return Optional.of(Rank.FIRST);
     }
     return Optional.empty();
   }

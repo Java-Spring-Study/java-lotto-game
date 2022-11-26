@@ -50,11 +50,11 @@ public class LottoTest {
   @DisplayName("WinningLotto match 메서드 테스트")
   public void WinningLottoMatchTest() {
     List<Integer> lottoList = Arrays.asList(1, 2, 3, 4, 5, 6);
-    assertRank(Arrays.asList(1, 2, 3, 4, 5, 6), lottoList, 7, Optional.ofNullable(Rank.FIRST));
-    assertRank(Arrays.asList(1, 2, 3, 4, 5, 7), lottoList, 7, Optional.ofNullable(Rank.SECOND));
-    assertRank(Arrays.asList(1, 2, 3, 4, 5, 8), lottoList, 7, Optional.ofNullable(Rank.THIRD));
-    assertRank(Arrays.asList(1, 2, 3, 4, 8, 9), lottoList, 7, Optional.ofNullable(Rank.FOURTH));
-    assertRank(Arrays.asList(1, 2, 3, 8, 9, 10), lottoList, 7, Optional.ofNullable(Rank.FIFTH));
+    assertRank(Arrays.asList(1, 2, 3, 4, 5, 6), lottoList, 7, Optional.of(Rank.FIRST));
+    assertRank(Arrays.asList(1, 2, 3, 4, 5, 7), lottoList, 7, Optional.of(Rank.SECOND));
+    assertRank(Arrays.asList(1, 2, 3, 4, 5, 8), lottoList, 7, Optional.of(Rank.THIRD));
+    assertRank(Arrays.asList(1, 2, 3, 4, 8, 9), lottoList, 7, Optional.of(Rank.FOURTH));
+    assertRank(Arrays.asList(1, 2, 3, 8, 9, 10), lottoList, 7, Optional.of(Rank.FIFTH));
     assertRank(Arrays.asList(1, 2, 8, 9, 10, 11), lottoList, 7,Optional.empty());
     assertRank(Arrays.asList(1, 8, 9, 10, 11, 12), lottoList, 7, Optional.empty());
     assertRank(Arrays.asList(8, 9, 10, 11, 12, 13), lottoList, 7, Optional.empty());
