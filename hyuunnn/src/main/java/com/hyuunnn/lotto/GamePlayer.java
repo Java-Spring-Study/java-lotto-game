@@ -117,10 +117,8 @@ public class GamePlayer {
   private HashMap<Integer, Integer> getRankMap() {
     HashMap<Integer, Integer> rankMap = new HashMap<>();
     lottoList.forEach(lottoObj -> {
-      Rank lottoRank = winningLotto.match(lottoObj);
-      if (lottoRank != null) {
-        rankMap.merge(lottoRank.getMatch(), 1, Integer::sum);
-      }
+      Optional<Rank> lottoRank = winningLotto.match(lottoObj);
+      lottoRank.ifPresent(rank -> rankMap.merge(rank.getMatch(), 1, Integer::sum));
     });
     return rankMap;
   }

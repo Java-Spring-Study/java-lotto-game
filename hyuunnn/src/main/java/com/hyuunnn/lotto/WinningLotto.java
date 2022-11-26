@@ -1,5 +1,7 @@
 package com.hyuunnn.lotto;
 
+import java.util.Optional;
+
 /**
  * 당첨 번호를 담당하는 객체
  */
@@ -13,7 +15,7 @@ public class WinningLotto {
     this.bonusNo = bonusNo;
   }
 
-  public Rank match(Lotto userLotto) {
+  public Optional<Rank> match(Lotto userLotto) {
     int matchCount = getMatchCount(userLotto);
     return getRank(userLotto, matchCount, bonusNo);
   }
@@ -24,17 +26,17 @@ public class WinningLotto {
         .count();
   }
 
-  private Rank getRank(Lotto userLotto, int matchCount, int bonusNumber) {
+  private Optional<Rank> getRank(Lotto userLotto, int matchCount, int bonusNumber) {
     if (matchCount == 3) {
-      return Rank.FIFTH;
+      return Optional.ofNullable(Rank.FIFTH);
     } else if (matchCount == 4) {
-      return Rank.FOURTH;
+      return Optional.ofNullable(Rank.FOURTH);
     } else if (matchCount == 5) {
-      return checkBonusNumber(userLotto, bonusNumber);
+      return Optional.ofNullable(checkBonusNumber(userLotto, bonusNumber));
     } else if (matchCount == 6) {
-      return Rank.FIRST;
+      return Optional.ofNullable(Rank.FIRST);
     }
-    return null;
+    return Optional.empty();
   }
 
   private Rank checkBonusNumber(Lotto userLotto, int bonusNumber) {
