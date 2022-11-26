@@ -1,21 +1,21 @@
-package com.hyuunnn.lotto.Error;
+package com.hyuunnn.lotto.Validator;
 
 import static com.hyuunnn.lotto.Util.LOTTO_LENGTH;
 
 import java.util.Arrays;
 
-public class WinningNumberError extends Error {
+public class WinningNumberValidator extends Validator {
 
   public static void validateNumber(String[] strList) {
-    checkNumberList(strList);
+    checkIntegerList(strList);
     checkRangeList(strList);
     checkLength(strList);
     checkOverlap(strList);
   }
 
-  public static void checkNumberList(String[] strList) {
+  public static void checkIntegerList(String[] strList) {
     Arrays.stream(strList)
-        .forEach(str -> checkNumber(str));
+        .forEach(str -> checkInteger(str));
   }
 
   public static void checkRangeList(String[] strList) {

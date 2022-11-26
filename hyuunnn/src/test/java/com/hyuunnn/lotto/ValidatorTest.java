@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Arrays;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.hyuunnn.lotto.Error.BonusNumberError;
-import com.hyuunnn.lotto.Error.PriceNumberError;
-import com.hyuunnn.lotto.Error.WinningNumberError;
+import com.hyuunnn.lotto.Validator.BonusNumberValidator;
+import com.hyuunnn.lotto.Validator.PriceNumberValidator;
+import com.hyuunnn.lotto.Validator.WinningNumberValidator;
 
-public class ErrorTest {
+public class ValidatorTest {
 
   private Throwable exception;
 
@@ -22,13 +22,13 @@ public class ErrorTest {
     TryPriceNumberException("1", "구매할 돈이 부족합니다.");
     TryPriceNumberException("100", "구매할 돈이 부족합니다.");
     TryPriceNumberException("999", "구매할 돈이 부족합니다.");
-    TryPriceNumberException("100000000000000", "64비트 정수입력 범위를 벗어났습니다.");
-    TryPriceNumberException("asdf", "64비트 정수입력 범위를 벗어났습니다.");
+    TryPriceNumberException("100000000000000", "32비트 정수입력 범위를 벗어났습니다.");
+    TryPriceNumberException("asdf", "32비트 정수입력 범위를 벗어났습니다.");
   }
 
   private void TryPriceNumberException(String strNumber, String msg) {
     exception = assertThrows(RuntimeException.class, () -> {
-      PriceNumberError.validateNumber(strNumber);
+      PriceNumberValidator.validateNumber(strNumber);
     });
     assertEquals(msg, exception.getMessage());
   }
@@ -46,12 +46,12 @@ public class ErrorTest {
     TryWinningNumberException(new String[]{"1", "1", "1", "1", "1", "1"}, "로또 숫자는 서로 중복될 수 없습니다.");
     TryWinningNumberException(new String[]{"34", "20", "18", "43", "45", "34"},
         "로또 숫자는 서로 중복될 수 없습니다.");
-    TryWinningNumberException(new String[]{"aa", "bb", "44"}, "64비트 정수입력 범위를 벗어났습니다.");
+    TryWinningNumberException(new String[]{"aa", "bb", "44"}, "32비트 정수입력 범위를 벗어났습니다.");
   }
 
   private void TryWinningNumberException(String[] strList, String msg) {
     exception = assertThrows(RuntimeException.class, () -> {
-      WinningNumberError.validateNumber(strList);
+      WinningNumberValidator.validateNumber(strList);
     });
     assertEquals(msg, exception.getMessage());
   }
@@ -67,13 +67,13 @@ public class ErrorTest {
     TryBonusNumberException(lotto, "9", "보너스볼은 당첨 로또 번호 6개 숫자와 중복될 수 없습니다.");
     TryBonusNumberException(lotto, "20", "보너스볼은 당첨 로또 번호 6개 숫자와 중복될 수 없습니다.");
     TryBonusNumberException(lotto, "100", "로또 숫자 범위는 1~45 입니다.");
-    TryBonusNumberException(lotto, "100000000000000", "64비트 정수입력 범위를 벗어났습니다.");
-    TryBonusNumberException(lotto, "asdf", "64비트 정수입력 범위를 벗어났습니다.");
+    TryBonusNumberException(lotto, "100000000000000", "32비트 정수입력 범위를 벗어났습니다.");
+    TryBonusNumberException(lotto, "asdf", "32비트 정수입력 범위를 벗어났습니다.");
   }
 
   private void TryBonusNumberException(Lotto lotto, String strNumber, String msg) {
     exception = assertThrows(RuntimeException.class, () -> {
-      BonusNumberError.validateNumber(lotto, strNumber);
+      BonusNumberValidator.validateNumber(lotto, strNumber);
     });
     assertEquals(msg, exception.getMessage());
   }

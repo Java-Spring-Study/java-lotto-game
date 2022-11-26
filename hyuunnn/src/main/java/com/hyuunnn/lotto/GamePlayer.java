@@ -5,9 +5,9 @@ import static com.hyuunnn.lotto.Util.SCANNER;
 import static com.hyuunnn.lotto.Util.SEPARATOR;
 import static com.hyuunnn.lotto.Util.randomize;
 
-import com.hyuunnn.lotto.Error.PriceNumberError;
-import com.hyuunnn.lotto.Error.WinningNumberError;
-import com.hyuunnn.lotto.Error.BonusNumberError;
+import com.hyuunnn.lotto.Validator.PriceNumberValidator;
+import com.hyuunnn.lotto.Validator.WinningNumberValidator;
+import com.hyuunnn.lotto.Validator.BonusNumberValidator;
 import com.hyuunnn.lotto.Util.InputType;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,7 +48,7 @@ public class GamePlayer {
   private InputType inputPrice() {
     try {
       String strInputPrice = SCANNER.nextLine();
-      PriceNumberError.validateNumber(strInputPrice);
+      PriceNumberValidator.validateNumber(strInputPrice);
       addLotto(Integer.parseInt(strInputPrice));
 
     } catch (Exception e) {
@@ -76,7 +76,7 @@ public class GamePlayer {
     try {
       String strInputWinningNumber = SCANNER.nextLine();
       String[] strWinningNumberList = strInputWinningNumber.split(SEPARATOR);
-      WinningNumberError.validateNumber(strWinningNumberList);
+      WinningNumberValidator.validateNumber(strWinningNumberList);
 
       winningNumberList = new Lotto(Arrays.stream(strWinningNumberList)
           .mapToInt(Integer::parseInt)
@@ -93,7 +93,7 @@ public class GamePlayer {
   private InputType inputBonusNumber() {
     try {
       String strInputBonusNumber = SCANNER.nextLine();
-      BonusNumberError.validateNumber(winningNumberList, strInputBonusNumber);
+      BonusNumberValidator.validateNumber(winningNumberList, strInputBonusNumber);
       bonusNumber = Integer.parseInt(strInputBonusNumber);
 
     } catch (Exception e) {

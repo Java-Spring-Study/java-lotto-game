@@ -1,11 +1,11 @@
-package com.hyuunnn.lotto.Error;
+package com.hyuunnn.lotto.Validator;
 
 import static com.hyuunnn.lotto.Util.MINIMUM_LOTTO_PRICE;
 
-public class PriceNumberError extends Error {
+public class PriceNumberValidator extends Validator {
 
   public static void validateNumber(String strNumber) {
-    checkNumber(strNumber);
+    checkInteger(strNumber);
     int price = Integer.parseInt(strNumber);
     checkNegativePrice(price);
     checkNumberPrice(price);

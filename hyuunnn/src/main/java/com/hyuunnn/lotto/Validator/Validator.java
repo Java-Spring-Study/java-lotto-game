@@ -1,12 +1,12 @@
-package com.hyuunnn.lotto.Error;
+package com.hyuunnn.lotto.Validator;
 
 import static com.hyuunnn.lotto.Util.MAX_LOTTO_RANGE;
 import static com.hyuunnn.lotto.Util.MIN_LOTTO_RANGE;
 import static com.hyuunnn.lotto.Util.isNotInteger;
 
-public class Error {
+public class Validator {
 
-  public static void checkNumber(String strNumber) {
+  public static void checkInteger(String strNumber) {
     if (isNotInteger(strNumber)) {
       throw new IllegalStateException(ErrorMessage.INVALID_NUMBER.get());
     }
