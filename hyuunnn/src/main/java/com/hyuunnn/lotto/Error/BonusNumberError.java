@@ -5,7 +5,7 @@ import com.hyuunnn.lotto.Lotto;
 public class BonusNumberError extends Error {
 
   public static void validateNumber(Lotto lottoList, String strNumber) {
-    checkNumeric(strNumber);
+    checkNumber(strNumber);
     int bonusNumber = Integer.parseInt(strNumber);
     checkRange(bonusNumber);
     checkOverlap(lottoList, bonusNumber);

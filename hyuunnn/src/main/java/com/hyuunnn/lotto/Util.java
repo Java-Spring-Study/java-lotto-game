@@ -15,14 +15,13 @@ public class Util {
   public static final int MINIMUM_LOTTO_PRICE = 1000;
   public static final String SEPARATOR = ",";
 
-  public static InputType isInteger(String str) {
+  public static boolean isNotInteger(String str) {
     try {
       Integer.parseInt(str);
-      return InputType.VALID;
-
     } catch (NumberFormatException e) {
-      return InputType.INVALID;
+      return true;
     }
+    return false;
   }
 
   public static List<Integer> randomize() {

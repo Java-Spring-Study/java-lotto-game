@@ -5,7 +5,7 @@ import static com.hyuunnn.lotto.Util.MINIMUM_LOTTO_PRICE;
 public class PriceNumberError extends Error {
 
   public static void validateNumber(String strNumber) {
-    checkNumeric(strNumber);
+    checkNumber(strNumber);
     int price = Integer.parseInt(strNumber);
     checkNegativePrice(price);
     checkNumberPrice(price);

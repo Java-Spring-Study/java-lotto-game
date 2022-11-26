@@ -7,15 +7,15 @@ import java.util.Arrays;
 public class WinningNumberError extends Error {
 
   public static void validateNumber(String[] strList) {
-    checkNumericList(strList);
+    checkNumberList(strList);
     checkRangeList(strList);
     checkLength(strList);
     checkOverlap(strList);
   }
 
-  public static void checkNumericList(String[] strList) {
+  public static void checkNumberList(String[] strList) {
     Arrays.stream(strList)
-        .forEach(str -> checkNumeric(str));
+        .forEach(str -> checkNumber(str));
   }
 
   public static void checkRangeList(String[] strList) {
