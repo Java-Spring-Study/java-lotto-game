@@ -54,7 +54,9 @@ public class LottoTest {
     assertRank(Arrays.asList(1, 2, 3, 4, 5, 7), lottoList, 7, Optional.of(Rank.SECOND));
     assertRank(Arrays.asList(1, 2, 3, 4, 5, 8), lottoList, 7, Optional.of(Rank.THIRD));
     assertRank(Arrays.asList(1, 2, 3, 4, 8, 9), lottoList, 7, Optional.of(Rank.FOURTH));
+    assertRank(Arrays.asList(1, 2, 3, 4, 8, 7), lottoList, 7, Optional.of(Rank.FOURTH));
     assertRank(Arrays.asList(1, 2, 3, 8, 9, 10), lottoList, 7, Optional.of(Rank.FIFTH));
+    assertRank(Arrays.asList(1, 2, 3, 8, 9, 7), lottoList, 7, Optional.of(Rank.FIFTH));
     assertRank(Arrays.asList(1, 2, 8, 9, 10, 11), lottoList, 7,Optional.empty());
     assertRank(Arrays.asList(1, 8, 9, 10, 11, 12), lottoList, 7, Optional.empty());
     assertRank(Arrays.asList(8, 9, 10, 11, 12, 13), lottoList, 7, Optional.empty());
