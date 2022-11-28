@@ -33,11 +33,8 @@ public class WinningLotto {
   }
 
   private Optional<Rank> getRank(int matchCount, boolean bonusMatch) {
-    for (Rank rank : Rank.values()) {
-      if (rank.isMatch(matchCount, bonusMatch)) {
-        return Optional.of(rank);
-      }
-    }
-    return Optional.empty();
+    return Arrays.stream(Rank.values())
+        .filter(rank -> rank.isMatch(matchCount, bonusMatch))
+        .findFirst();
   }
 }
