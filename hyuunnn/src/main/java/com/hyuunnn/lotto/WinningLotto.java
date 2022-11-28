@@ -1,5 +1,6 @@
 package com.hyuunnn.lotto;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -17,7 +18,8 @@ public class WinningLotto {
 
   public Optional<Rank> match(Lotto userLotto) {
     int matchCount = getMatchCount(userLotto);
-    return getRank(userLotto, matchCount, bonusNo);
+    boolean bonusMatch = isBonusMatch(userLotto);
+    return getRank(matchCount, bonusMatch);
   }
 
   private int getMatchCount(Lotto userLotto) {
@@ -26,23 +28,13 @@ public class WinningLotto {
         .count();
   }
 
-  private Optional<Rank> getRank(Lotto userLotto, int matchCount, int bonusNumber) {
-    if (matchCount == 3) {
-      return Optional.of(Rank.FIFTH);
-    } else if (matchCount == 4) {
-      return Optional.of(Rank.FOURTH);
-    } else if (matchCount == 5) {
-      return Optional.of(checkBonusNumber(userLotto, bonusNumber));
-    } else if (matchCount == 6) {
-      return Optional.of(Rank.FIRST);
-    }
-    return Optional.empty();
+  private boolean isBonusMatch(Lotto userLotto) {
+    return userLotto.getLottoList().contains(bonusNo);
   }
 
-  private Rank checkBonusNumber(Lotto userLotto, int bonusNumber) {
-    if (userLotto.getLottoList().contains(bonusNumber)) {
-      return Rank.SECOND;
-    }
-    return Rank.THIRD;
+  private Optional<Rank> getRank(int matchCount, boolean bonusMatch) {
+    return Arrays.stream(Rank.values())
+        .filter(rank -> rank.isMatch(matchCount, bonusMatch))
+        .findFirst();
   }
 }
