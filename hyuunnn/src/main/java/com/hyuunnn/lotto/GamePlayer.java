@@ -2,8 +2,10 @@ package com.hyuunnn.lotto;
 
 import static com.hyuunnn.lotto.Util.MINIMUM_LOTTO_PRICE;
 import static com.hyuunnn.lotto.Util.SCANNER;
-import static com.hyuunnn.lotto.Util.SEPARATOR;
+import static com.hyuunnn.lotto.Util.getLottoCount;
 import static com.hyuunnn.lotto.Util.randomize;
+import static com.hyuunnn.lotto.Util.strToArray;
+import static com.hyuunnn.lotto.Util.strToIntegerList;
 
 import com.hyuunnn.lotto.Validator.PriceNumberValidator;
 import com.hyuunnn.lotto.Validator.WinningNumberValidator;
@@ -68,20 +70,11 @@ public class GamePlayer {
     });
   }
 
-  private int getLottoCount(int price) {
-    return price / MINIMUM_LOTTO_PRICE;
-  }
-
   private InputType inputWinningNumber() {
     try {
       String strInputWinningNumber = SCANNER.nextLine();
-      String[] strWinningNumberList = strInputWinningNumber.split(SEPARATOR);
-      WinningNumberValidator.validateNumber(strWinningNumberList);
-
-      winningNumberList = new Lotto(Arrays.stream(strWinningNumberList)
-          .mapToInt(Integer::parseInt)
-          .boxed()
-          .toList());
+      WinningNumberValidator.validateNumber(strToArray(strInputWinningNumber));
+      winningNumberList = new Lotto(strToIntegerList(strInputWinningNumber));
 
     } catch (Exception e) {
       System.out.println(e.getMessage());

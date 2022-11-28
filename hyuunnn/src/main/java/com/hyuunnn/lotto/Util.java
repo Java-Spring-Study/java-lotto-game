@@ -1,5 +1,6 @@
 package com.hyuunnn.lotto;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,21 @@ public class Util {
       numberList.add(r.nextInt(MAX_LOTTO_RANGE) + 1);
     }
     return List.copyOf(numberList);
+  }
+
+  public static List<Integer> strToIntegerList(String strNumber) {
+    return Arrays.stream(strToArray(strNumber))
+        .mapToInt(Integer::parseInt)
+        .boxed()
+        .toList();
+  }
+
+  public static String[] strToArray(String strNumber) {
+    return strNumber.split(SEPARATOR);
+  }
+
+  public static int getLottoCount(int price) {
+    return price / MINIMUM_LOTTO_PRICE;
   }
 
   public enum InputType {VALID, INVALID}
