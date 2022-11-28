@@ -42,7 +42,7 @@ public enum Rank {
 
     public boolean isMatch(boolean bonusMatch) {
       if (this == Bonus.NONE) {
-        return this.match;
+        return true;
       }
       return match == bonusMatch;
     }
