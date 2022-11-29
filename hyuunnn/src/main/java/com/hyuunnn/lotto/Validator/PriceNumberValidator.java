@@ -1,12 +1,13 @@
 package com.hyuunnn.lotto.Validator;
 
 import static com.hyuunnn.lotto.Util.MINIMUM_LOTTO_PRICE;
+import static com.hyuunnn.lotto.Util.strToInteger;
 
 public class PriceNumberValidator extends Validator {
 
   public static void validateNumber(String strNumber) {
     checkInteger(strNumber);
-    int price = Integer.parseInt(strNumber);
+    int price = strToInteger(strNumber);
     checkNegativePrice(price);
     checkNumberPrice(price);
   }

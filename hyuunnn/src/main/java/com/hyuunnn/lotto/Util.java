@@ -18,7 +18,7 @@ public class Util {
 
   public static boolean isNotInteger(String str) {
     try {
-      Integer.parseInt(str);
+      strToInteger(str);
     } catch (NumberFormatException e) {
       return true;
     }
@@ -44,6 +44,10 @@ public class Util {
 
   public static String[] strToArray(String strNumber) {
     return strNumber.split(SEPARATOR);
+  }
+
+  public static int strToInteger(String strNumber) {
+    return Integer.parseInt(strNumber);
   }
 
   public static int getLottoCount(int price) {

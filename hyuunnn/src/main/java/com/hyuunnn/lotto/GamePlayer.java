@@ -5,6 +5,7 @@ import static com.hyuunnn.lotto.Util.SCANNER;
 import static com.hyuunnn.lotto.Util.getLottoCount;
 import static com.hyuunnn.lotto.Util.randomize;
 import static com.hyuunnn.lotto.Util.strToArray;
+import static com.hyuunnn.lotto.Util.strToInteger;
 import static com.hyuunnn.lotto.Util.strToIntegerList;
 
 import com.hyuunnn.lotto.Validator.PriceNumberValidator;
@@ -51,7 +52,7 @@ public class GamePlayer {
     try {
       String strInputPrice = SCANNER.nextLine();
       PriceNumberValidator.validateNumber(strInputPrice);
-      addLotto(Integer.parseInt(strInputPrice));
+      addLotto(strToInteger(strInputPrice));
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -87,7 +88,7 @@ public class GamePlayer {
     try {
       String strInputBonusNumber = SCANNER.nextLine();
       BonusNumberValidator.validateNumber(winningNumberList, strInputBonusNumber);
-      bonusNumber = Integer.parseInt(strInputBonusNumber);
+      bonusNumber = strToInteger(strInputBonusNumber);
 
     } catch (Exception e) {
       System.out.println(e.getMessage());
