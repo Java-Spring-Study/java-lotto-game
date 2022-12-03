@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import com.hyuunnn.lotto.Validator.BonusNumberValidator;
@@ -60,20 +61,20 @@ public class ValidatorTest {
   @DisplayName("보너스 볼 입력 에러 테스트")
   public void BonusNumberErrorTest() {
 
-    Lotto lotto = new Lotto(Arrays.asList(34, 20, 18, 43, 45, 9));
+    List<Integer> lottoList = Arrays.asList(34, 20, 18, 43, 45, 9);
 
-    TryBonusNumberException(lotto, "-1", "로또 숫자 범위는 1~45 입니다.");
-    TryBonusNumberException(lotto, "0", "로또 숫자 범위는 1~45 입니다.");
-    TryBonusNumberException(lotto, "9", "보너스볼은 당첨 로또 번호 6개 숫자와 중복될 수 없습니다.");
-    TryBonusNumberException(lotto, "20", "보너스볼은 당첨 로또 번호 6개 숫자와 중복될 수 없습니다.");
-    TryBonusNumberException(lotto, "100", "로또 숫자 범위는 1~45 입니다.");
-    TryBonusNumberException(lotto, "100000000000000", "32비트 정수입력 범위를 벗어났습니다.");
-    TryBonusNumberException(lotto, "asdf", "32비트 정수입력 범위를 벗어났습니다.");
+    TryBonusNumberException(lottoList, "-1", "로또 숫자 범위는 1~45 입니다.");
+    TryBonusNumberException(lottoList, "0", "로또 숫자 범위는 1~45 입니다.");
+    TryBonusNumberException(lottoList, "9", "보너스볼은 당첨 로또 번호 6개 숫자와 중복될 수 없습니다.");
+    TryBonusNumberException(lottoList, "20", "보너스볼은 당첨 로또 번호 6개 숫자와 중복될 수 없습니다.");
+    TryBonusNumberException(lottoList, "100", "로또 숫자 범위는 1~45 입니다.");
+    TryBonusNumberException(lottoList, "100000000000000", "32비트 정수입력 범위를 벗어났습니다.");
+    TryBonusNumberException(lottoList, "asdf", "32비트 정수입력 범위를 벗어났습니다.");
   }
 
-  private void TryBonusNumberException(Lotto lotto, String strNumber, String msg) {
+  private void TryBonusNumberException(List<Integer> lottoList, String strNumber, String msg) {
     exception = assertThrows(RuntimeException.class, () -> {
-      BonusNumberValidator.validateNumber(lotto, strNumber);
+      BonusNumberValidator.validateNumber(lottoList, strNumber);
     });
     assertEquals(msg, exception.getMessage());
   }
