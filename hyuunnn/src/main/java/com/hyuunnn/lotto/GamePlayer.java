@@ -1,16 +1,9 @@
 package com.hyuunnn.lotto;
 
 import static com.hyuunnn.lotto.Util.MINIMUM_LOTTO_PRICE;
-import static com.hyuunnn.lotto.Util.SCANNER;
 import static com.hyuunnn.lotto.Util.getLottoCount;
 import static com.hyuunnn.lotto.Util.randomize;
-import static com.hyuunnn.lotto.Util.strToArray;
-import static com.hyuunnn.lotto.Util.strToInteger;
-import static com.hyuunnn.lotto.Util.strToIntegerList;
 
-import com.hyuunnn.lotto.Validator.PriceNumberValidator;
-import com.hyuunnn.lotto.Validator.WinningNumberValidator;
-import com.hyuunnn.lotto.Validator.BonusNumberValidator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class GamePlayer {
+public class GamePlayer extends GameInput {
 
   private final List<Lotto> lottoList = new ArrayList<>();
   private WinningLotto winningLotto;
@@ -31,7 +24,7 @@ public class GamePlayer {
 
   private void input() {
     System.out.println("구입 금액을 입력해주세요.");
-    inputPrice();
+    addLotto(inputPrice());
 
     System.out.println("지난 주 당첨번호를 입력해 주세요.");
     List<Integer> winningNumberList = inputWinningNumber();
@@ -42,20 +35,6 @@ public class GamePlayer {
     winningLotto = new WinningLotto(new Lotto(winningNumberList), bonusNumber);
   }
 
-  private void inputPrice() {
-    while (true) {
-      try {
-        String strInputPrice = SCANNER.nextLine();
-        PriceNumberValidator.validateNumber(strInputPrice);
-        addLotto(strToInteger(strInputPrice));
-        break;
-
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
-    }
-  }
-
   private void addLotto(int price) {
     lottoCount = getLottoCount(price);
     System.out.printf("%d개를 구매했습니다.\n", lottoCount);
@@ -64,33 +43,6 @@ public class GamePlayer {
       lottoList.add(new Lotto(randomize()));
       System.out.println(lottoList.get(i));
     });
-  }
-
-  private List<Integer> inputWinningNumber() {
-    while (true) {
-      try {
-        String strInputWinningNumber = SCANNER.nextLine();
-        WinningNumberValidator.validateNumber(strToArray(strInputWinningNumber));
-        return strToIntegerList(strInputWinningNumber);
-
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
-    }
-  }
-
-
-  private int inputBonusNumber(List<Integer> winningNumberList) {
-    while (true) {
-      try {
-        String strInputBonusNumber = SCANNER.nextLine();
-        BonusNumberValidator.validateNumber(winningNumberList, strInputBonusNumber);
-        return strToInteger(strInputBonusNumber);
-
-      } catch (Exception e) {
-        System.out.println(e.getMessage());
-      }
-    }
   }
 
   private void printResult() {
