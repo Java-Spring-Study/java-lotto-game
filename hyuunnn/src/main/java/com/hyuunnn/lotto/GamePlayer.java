@@ -11,7 +11,6 @@ import static com.hyuunnn.lotto.Util.strToIntegerList;
 import com.hyuunnn.lotto.Validator.PriceNumberValidator;
 import com.hyuunnn.lotto.Validator.WinningNumberValidator;
 import com.hyuunnn.lotto.Validator.BonusNumberValidator;
-import com.hyuunnn.lotto.Util.InputType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,8 +22,6 @@ public class GamePlayer {
 
   private final List<Lotto> lottoList = new ArrayList<>();
   private WinningLotto winningLotto;
-  private Lotto winningNumberList;
-  private int bonusNumber;
   private int lottoCount;
 
   public void run() {
@@ -34,31 +31,29 @@ public class GamePlayer {
 
   private void input() {
     System.out.println("구입 금액을 입력해주세요.");
-    while (inputPrice() == InputType.INVALID)
-      ;
+    inputPrice();
 
     System.out.println("지난 주 당첨번호를 입력해 주세요.");
-    while (inputWinningNumber() == InputType.INVALID)
-      ;
+    List<Integer> winningNumberList = inputWinningNumber();
 
     System.out.println("보너스 볼을 입력해 주세요.");
-    while (inputBonusNumber() == InputType.INVALID)
-      ;
+    int bonusNumber = inputBonusNumber(winningNumberList);
 
-    winningLotto = new WinningLotto(winningNumberList, bonusNumber);
+    winningLotto = new WinningLotto(new Lotto(winningNumberList), bonusNumber);
   }
 
-  private InputType inputPrice() {
-    try {
-      String strInputPrice = SCANNER.nextLine();
-      PriceNumberValidator.validateNumber(strInputPrice);
-      addLotto(strToInteger(strInputPrice));
+  private void inputPrice() {
+    while (true) {
+      try {
+        String strInputPrice = SCANNER.nextLine();
+        PriceNumberValidator.validateNumber(strInputPrice);
+        addLotto(strToInteger(strInputPrice));
+        break;
 
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      return InputType.INVALID;
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
     }
-    return InputType.VALID;
   }
 
   private void addLotto(int price) {
@@ -71,30 +66,31 @@ public class GamePlayer {
     });
   }
 
-  private InputType inputWinningNumber() {
-    try {
-      String strInputWinningNumber = SCANNER.nextLine();
-      WinningNumberValidator.validateNumber(strToArray(strInputWinningNumber));
-      winningNumberList = new Lotto(strToIntegerList(strInputWinningNumber));
+  private List<Integer> inputWinningNumber() {
+    while (true) {
+      try {
+        String strInputWinningNumber = SCANNER.nextLine();
+        WinningNumberValidator.validateNumber(strToArray(strInputWinningNumber));
+        return strToIntegerList(strInputWinningNumber);
 
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      return InputType.INVALID;
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
     }
-    return InputType.VALID;
   }
 
-  private InputType inputBonusNumber() {
-    try {
-      String strInputBonusNumber = SCANNER.nextLine();
-      BonusNumberValidator.validateNumber(winningNumberList, strInputBonusNumber);
-      bonusNumber = strToInteger(strInputBonusNumber);
 
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-      return InputType.INVALID;
+  private int inputBonusNumber(List<Integer> winningNumberList) {
+    while (true) {
+      try {
+        String strInputBonusNumber = SCANNER.nextLine();
+        BonusNumberValidator.validateNumber(winningNumberList, strInputBonusNumber);
+        return strToInteger(strInputBonusNumber);
+
+      } catch (Exception e) {
+        System.out.println(e.getMessage());
+      }
     }
-    return InputType.VALID;
   }
 
   private void printResult() {

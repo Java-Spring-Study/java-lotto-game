@@ -3,18 +3,19 @@ package com.hyuunnn.lotto.Validator;
 import static com.hyuunnn.lotto.Util.strToInteger;
 
 import com.hyuunnn.lotto.Lotto;
+import java.util.List;
 
 public class BonusNumberValidator extends Validator {
 
-  public static void validateNumber(Lotto lottoList, String strNumber) {
+  public static void validateNumber(List<Integer> lottoList, String strNumber) {
     checkInteger(strNumber);
     int bonusNumber = strToInteger(strNumber);
     checkRange(bonusNumber);
     checkOverlap(lottoList, bonusNumber);
   }
 
-  public static void checkOverlap(Lotto lottoList, int bonusNumber) {
-    if (lottoList.getLottoList().contains(bonusNumber)) {
+  public static void checkOverlap(List<Integer> lottoList, int bonusNumber) {
+    if (lottoList.contains(bonusNumber)) {
       throw new IllegalStateException(ErrorMessage.INVALID_OVERLAP.get());
     }
   }

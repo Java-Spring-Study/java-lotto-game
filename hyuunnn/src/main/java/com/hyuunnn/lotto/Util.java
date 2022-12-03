@@ -54,5 +54,4 @@ public class Util {
     return price / MINIMUM_LOTTO_PRICE;
   }
 
-  public enum InputType {VALID, INVALID}
 }
