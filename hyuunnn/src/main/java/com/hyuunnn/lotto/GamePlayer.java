@@ -1,6 +1,7 @@
 package com.hyuunnn.lotto;
 
 import static com.hyuunnn.lotto.Util.MINIMUM_LOTTO_PRICE;
+import static com.hyuunnn.lotto.Util.SCANNER;
 import static com.hyuunnn.lotto.Util.getLottoCount;
 import static com.hyuunnn.lotto.Util.randomize;
 
@@ -20,6 +21,7 @@ public class GamePlayer extends GameInput {
   public void run() {
     input();
     printResult();
+    SCANNER.close();
   }
 
   private void input() {
