@@ -16,15 +16,6 @@ public class Util {
   public static final int MINIMUM_LOTTO_PRICE = 1000;
   public static final String SEPARATOR = ",";
 
-  public static boolean isNotInteger(String str) {
-    try {
-      strToInteger(str);
-    } catch (NumberFormatException e) {
-      return true;
-    }
-    return false;
-  }
-
   public static List<Integer> randomize() {
     Random r = new Random();
     Set<Integer> numberList = new LinkedHashSet<>();

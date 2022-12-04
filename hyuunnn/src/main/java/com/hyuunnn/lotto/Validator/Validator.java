@@ -2,7 +2,7 @@ package com.hyuunnn.lotto.Validator;
 
 import static com.hyuunnn.lotto.Util.MAX_LOTTO_RANGE;
 import static com.hyuunnn.lotto.Util.MIN_LOTTO_RANGE;
-import static com.hyuunnn.lotto.Util.isNotInteger;
+import static com.hyuunnn.lotto.Util.strToInteger;
 
 public class Validator {
 
@@ -10,6 +10,15 @@ public class Validator {
     if (isNotInteger(strNumber)) {
       throw new IllegalStateException(ErrorMessage.INVALID_NUMBER.get());
     }
+  }
+
+  public static boolean isNotInteger(String str) {
+    try {
+      strToInteger(str);
+    } catch (NumberFormatException e) {
+      return true;
+    }
+    return false;
   }
 
   public static void checkRange(int lottoNumber) {
