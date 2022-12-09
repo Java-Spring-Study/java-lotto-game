@@ -2,7 +2,6 @@ package com.hyuunnn.lotto.Validator;
 
 import static com.hyuunnn.lotto.Util.strToInteger;
 
-import com.hyuunnn.lotto.Lotto;
 import java.util.List;
 
 public class BonusNumberValidator extends Validator {
