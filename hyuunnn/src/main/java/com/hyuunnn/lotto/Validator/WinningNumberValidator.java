@@ -15,13 +15,13 @@ public class WinningNumberValidator extends Validator {
 
   public static void checkIntegerList(String[] strList) {
     Arrays.stream(strList)
-        .forEach(str -> checkInteger(str));
+        .forEach(Validator::checkInteger);
   }
 
   public static void checkRangeList(String[] strList) {
     Arrays.stream(strList)
         .mapToInt(Integer::parseInt)
-        .forEach(n -> checkRange(n));
+        .forEach(Validator::checkRange);
   }
 
   public static void checkLength(String[] strList) {
